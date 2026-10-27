@@ -1,0 +1,2 @@
+import Analyzer from '@/components/Analyzer';
+export default function AnalyzePage(){return <div className="page-wrap"><span className="eyebrow">A closer look</span><h1 className="page-title serif">Let’s look at your plant.</h1><p className="subtle" style={{maxWidth:550,marginBottom:32}}>Share a clear photo and a little context. Analysis is a development preview; no AI diagnosis is connected yet.</p><Analyzer/></div>}
