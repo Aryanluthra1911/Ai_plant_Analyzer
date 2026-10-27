@@ -5,6 +5,7 @@
 
 # Next.js output
 /.next/
+/.next-dev/
 /out/
 /build/
 /dist/
@@ -17,6 +18,7 @@
 # Local uploads and generated data
 /public/uploads/
 /uploads/
+/.data/
 
 # Deployment and tooling
 /.vercel/
