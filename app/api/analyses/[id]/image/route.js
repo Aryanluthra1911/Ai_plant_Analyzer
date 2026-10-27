@@ -14,7 +14,7 @@ export async function GET(request, { params }) {
   const { id } = await params;
 
   try {
-    const analysis = await prisma.plantAnalysis.findFirst({ where: { id, userId: session.user.id }, select: { imageKey: true, imageMimeType: true } });
+    const analysis = await prisma.plantAnalysis.findFirst({ where: { id, userId: session.user.id }, select: { imageKey: true, imageMimeType: true, originalFileName: true } });
     if (!analysis) return NextResponse.json({ error: 'Image not found.' }, { status: 404 });
     const object = await readImage(analysis.imageKey);
     if (!object.Body) return NextResponse.json({ error: 'Image not found.' }, { status: 404 });
@@ -22,7 +22,9 @@ export async function GET(request, { params }) {
       'Content-Type': analysis.imageMimeType,
       'Cache-Control': 'private, no-store',
       'X-Content-Type-Options': 'nosniff',
-      'Content-Disposition': 'inline',
+      'Content-Disposition': new URL(request.url).searchParams.get('download') === '1'
+        ? `attachment; filename="${analysis.originalFileName.replace(/["\\]/g, '_')}"`
+        : 'inline',
     };
     if (Number.isFinite(object.ContentLength)) headers['Content-Length'] = String(object.ContentLength);
     return new Response(object.Body.transformToWebStream(), { headers });

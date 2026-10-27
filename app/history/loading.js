@@ -1,3 +1,3 @@
 export default function HistoryLoading() {
-  return <div className="page-wrap" aria-busy="true"><span className="eyebrow">Your private garden journal</span><h1 className="page-title serif">Analysis history</h1><p className="subtle">Loading your saved photos…</p></div>;
+  return <div className="page-wrap page-skeleton" aria-busy="true" aria-label="Loading analysis history"><span className="skeleton-block skeleton-eyebrow"/><span className="skeleton-block skeleton-title"/><span className="skeleton-block skeleton-copy"/><span className="skeleton-block skeleton-history-row"/><span className="skeleton-block skeleton-history-row"/><span className="skeleton-block skeleton-history-row"/></div>;
 }
